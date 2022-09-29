@@ -8,12 +8,22 @@ const displayQuNum = document.querySelector(".num-q");
 const next = document.querySelector(".next");
 const prev = document.querySelector(".prev");
 const restartBtn = document.querySelector(".restart");
-const nextPage = document.querySelector(".nextpage");
+const nextPage = document.querySelector(".nextPage");
 const selEl = document.querySelector("#sel");
 const inpEl = document.querySelector("#name");
+const $firstPage = document.querySelector(".page-container");
+const $secondPage = document.querySelector(".container-2");
+const errorCon = document.querySelector(".error-con");
+
 let getScore = [];
 let score = 0;
 let i = 0;
+
+nextPage.addEventListener("click", () => {
+  console.log("working");
+  $firstPage.style.display = "none";
+  $secondPage.style.display = "flex";
+});
 
 // function to display the question to the DOM
 function displayQuestion() {
@@ -31,12 +41,7 @@ function displayQuestion() {
     "Question " + questionBank[i].id + " of " + " " + questionBank.length;
   selectedOpt();
 }
-// nextPage.addEventListener("click", () => {
-//   if (inpEl.value == "" || selEl.value == "") {
-//   } else {
-//     location.href = "./index2.html";
-//   }
-// });
+
 // function select option
 function selectedOpt() {
   let allMyOption = document.querySelectorAll("input");
@@ -61,6 +66,7 @@ function nextQuestion() {
   let allMyOption = document.querySelectorAll("input");
   allMyOption.forEach((p) => {
     if (!p.checked) {
+      errorCon.classList.add("show");
       next.disabled = isDisabled;
     } else {
       i += 1;
@@ -68,6 +74,11 @@ function nextQuestion() {
       if (i < questionBank.length) {
         displayQuestion();
       }
+    }
+  });
+  allMyOption.forEach((p) => {
+    if (p.checked) {
+      errorCon.classList.remove("show");
     }
   });
 }
