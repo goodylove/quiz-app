@@ -9,12 +9,12 @@ const next = document.querySelector(".next");
 const prev = document.querySelector(".prev");
 const restartBtn = document.querySelector(".restart");
 const nextPage = document.querySelector(".nextpage");
+const selEl = document.querySelector("#sel");
+const inpEl = document.querySelector("#name");
 let getScore = [];
 let score = 0;
 let i = 0;
-nextPage.addEventListener("click", () => {});
 
-displayQuestion();
 // function to display the question to the DOM
 function displayQuestion() {
   questions.innerHTML = "Q" + (i + 1) + "" + questionBank[i].question;
@@ -31,6 +31,12 @@ function displayQuestion() {
     "Question " + questionBank[i].id + " of " + " " + questionBank.length;
   selectedOpt();
 }
+// nextPage.addEventListener("click", () => {
+//   if (inpEl.value == "" || selEl.value == "") {
+//   } else {
+//     location.href = "./index2.html";
+//   }
+// });
 // function select option
 function selectedOpt() {
   let allMyOption = document.querySelectorAll("input");
@@ -86,10 +92,12 @@ next.addEventListener("click", () => {
   nextQuestion();
   totalScore();
 });
-
 prev.addEventListener("click", () => {
   prevQuestion();
 });
+
 restartBtn.addEventListener("click", () => {
   location.reload();
 });
+
+displayQuestion();
