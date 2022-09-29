@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+// index.html css
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(231, 226, 226);
+  .input-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .input-con input {
+    margin: 2px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 5px;
+  }
+  .sel-con {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+  }
+  .quz {
+    padding: 10px 10px;
+  }
+
+  #sel {
+    height: 29px;
+    width: 82px;
+  }
+  .btn-con {
+    display: flex;
+    justify-content: center;
+  }
+  .next {
+    width: 50px;
+    height: 29px;
+    border: 2px solid whitesmoke;
+    padding: 5px;
+    outline: none;
+    background-color: black;
+    color: white;
+  }
+}
+// index2.html css
+.container-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  font-size: 20px;
+  background: gainsboro;
+  .btn-con {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+  }
+  .num-q {
+    margin: 30px 0;
+  }
+  .overallcontianer2 {
+    background-color: azure;
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .input-option {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .next {
+    width: 50px;
+    height: 30px;
+    background: beige;
+    border: 1px solid whitesmoke;
+  }
+  .prev {
+    width: 50px;
+    height: 30px;
+    background: beige;
+    border: 1px solid whitesmoke;
+  }
+  .restart {
+    width: 80px;
+    border: 1px solid azure;
+
+    outline: none;
+    height: 40px;
+    border-radius: 5px;
+    padding: 4px;
+    background: rgb(68, 129, 241);
+    border: 1px solid whitesmoke;
+  }
+  .option {
+    display: flex;
+  }
+  input {
+    padding: 0 10px;
+  }
+  .score-con {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width: 400px;
+    background-color: aquamarine;
+    border-radius: 10px;
+  }
+  .score {
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+  }
+}
