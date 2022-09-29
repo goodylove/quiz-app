@@ -9,7 +9,6 @@ const next = document.querySelector(".next");
 const prev = document.querySelector(".prev");
 const restartBtn = document.querySelector(".restart");
 const nextPage = document.querySelector(".nextPage");
-const selEl = document.querySelector("#sel");
 const inpEl = document.querySelector("#name");
 const $firstPage = document.querySelector(".page-container");
 const $secondPage = document.querySelector(".container-2");
@@ -20,26 +19,45 @@ let score = 0;
 let i = 0;
 
 nextPage.addEventListener("click", () => {
-  console.log("working");
   $firstPage.style.display = "none";
+  displayQuestion();
   $secondPage.style.display = "flex";
 });
 
 // function to display the question to the DOM
 function displayQuestion() {
-  questions.innerHTML = "Q" + (i + 1) + "" + questionBank[i].question;
+  const selEl = document.querySelector("#sel");
+  console.log(selEl);
 
-  const allMyOption = questionBank[i].options.map((p) => {
-    return `<div class="option">
-    <input type="radio" name="input" value="${p}">
-    <span class="option1">${p}</span>
-                    </div>`;
-  });
-  $list = document.querySelector(".list").innerHTML = allMyOption.join("");
+  if (selEl.value === "English") {
+    questions.innerHTML = "Q" + (i + 1) + "" + questionBank[0][i].question;
 
-  displayQuNum.innerHTML =
-    "Question " + questionBank[i].id + " of " + " " + questionBank.length;
-  selectedOpt();
+    const allMyOption = questionBank[0][i].options.map((p) => {
+      return `<div class="option">
+      <input type="radio" name="input" value="${p}">
+      <span class="option1">${p}</span>
+                      </div>`;
+    });
+    $list = document.querySelector(".list").innerHTML = allMyOption.join("");
+
+    displayQuNum.innerHTML =
+      "Question " + questionBank[0][i].id + " of " + " " + questionBank.length;
+    selectedOpt();
+  } else if (selEl.value === "Maths") {
+    questions.innerHTML = "Q" + (i + 1) + "" + questionBank[1][i].question;
+
+    const allMyOption = questionBank[1][i].options.map((p) => {
+      return `<div class="option">
+        <input type="radio" name="input" value="${p}">
+        <span class="option1">${p}</span>
+                        </div>`;
+    });
+    $list = document.querySelector(".list").innerHTML = allMyOption.join("");
+
+    displayQuNum.innerHTML =
+      "Question " + questionBank[1][i].id + " of " + " " + questionBank.length;
+    selectedOpt();
+  }
 }
 
 // function select option
@@ -50,11 +68,15 @@ function selectedOpt() {
     input.addEventListener("click", () => {
       let parentCon = input.parentElement;
       let optionCon = parentCon.querySelector(".option1");
-      let correct = questionBank[i].answer;
+      let correct = questionBank[0][i].answer;
+      let correct2 = questionBank[1][i].answer;
 
       if (optionCon.innerText === correct) {
         score += 1;
-      } else {
+      }
+
+      if (optionCon.innerText === correct2) {
+        score += 1;
       }
     });
   });
@@ -110,5 +132,3 @@ prev.addEventListener("click", () => {
 restartBtn.addEventListener("click", () => {
   location.reload();
 });
-
-displayQuestion();
