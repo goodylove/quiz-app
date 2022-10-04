@@ -26,6 +26,24 @@ const questionBank = [
       answer: "Who did this work?",
       id: 3,
     },
+    {
+      question: "How would one say goodybye in spainsh?",
+      options: ["Adios", "Halo", "Au Revior", "sair"],
+      answer: "Adios",
+      id: 4,
+    },
+    {
+      question:
+        "Which best selling Toy in 1983 caused hysteria, resulting riots breaking stores?",
+      options: [
+        "Cabbage patch kid",
+        "Transformers",
+        "Care Bears",
+        "Rubik's Cube",
+      ],
+      answer: "Care Bears",
+      id: 5,
+    },
   ],
 
   [
@@ -50,6 +68,19 @@ const questionBank = [
       options: ["2:3:4", "4:3:2", "6:4:3", "3:4:6"],
       answer: "6:4:3",
       id: 3,
+    },
+    {
+      question:
+        "There are Rs.300 in a box in denomination of Rs.1, 50 paisa and 25 paisa and in the ratio 2:4:8. Find the number of coins of 25 paisa ",
+      options: ["300", "200", "400", "100"],
+      answer: "400",
+      id: 4,
+    },
+    {
+      question: "If 2A=3B=4C, then A:B:C will be- ",
+      options: ["2:3:4", "4:3:2", "6:4:3", "3:4:6"],
+      answer: "6:4:3",
+      id: 5,
     },
   ],
 ];

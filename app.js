@@ -1,6 +1,6 @@
 const questionCon = document.querySelector(".question-holder");
 const questions = document.querySelector(".question");
-const scoreCon = document.querySelector(".score");
+let scoreCon = document.querySelector(".score");
 const quzCon = document.querySelector(".overallcontianer2");
 const scoreContainer = document.querySelector(".score-con");
 const span = document.querySelectorAll("span");
@@ -13,26 +13,31 @@ const inpEl = document.querySelector("#name");
 const $firstPage = document.querySelector(".page-container");
 const $secondPage = document.querySelector(".container-2");
 const errorCon = document.querySelector(".error-con");
+const $name = document.querySelector(".name");
+const selEl = document.querySelector("#sel");
 
 let getScore = [];
-let score = 0;
+let score1 = 0;
+let score2 = 0;
+let currentPosition = 0;
 let i = 0;
 
 nextPage.addEventListener("click", () => {
   $firstPage.style.display = "none";
-  displayQuestion();
   $secondPage.style.display = "flex";
+  displayQuestion();
 });
 
 // function to display the question to the DOM
 function displayQuestion() {
-  const selEl = document.querySelector("#sel");
-  console.log(selEl);
-
   if (selEl.value === "English") {
-    questions.innerHTML = "Q" + (i + 1) + "" + questionBank[0][i].question;
+    questions.innerHTML =
+      "Q" +
+      (currentPosition + 1) +
+      ".  " +
+      questionBank[0][currentPosition].question;
 
-    const allMyOption = questionBank[0][i].options.map((p) => {
+    const allMyOption = questionBank[0][currentPosition].options.map((p) => {
       return `<div class="option">
       <input type="radio" name="input" value="${p}">
       <span class="option1">${p}</span>
@@ -41,12 +46,20 @@ function displayQuestion() {
     $list = document.querySelector(".list").innerHTML = allMyOption.join("");
 
     displayQuNum.innerHTML =
-      "Question " + questionBank[0][i].id + " of " + " " + questionBank.length;
+      "Question " +
+      questionBank[0][currentPosition].id +
+      " of " +
+      " " +
+      questionBank[0].length;
     selectedOpt();
   } else if (selEl.value === "Maths") {
-    questions.innerHTML = "Q" + (i + 1) + "" + questionBank[1][i].question;
+    questions.innerHTML =
+      "Q" +
+      (currentPosition + 1) +
+      "" +
+      questionBank[1][currentPosition].question;
 
-    const allMyOption = questionBank[1][i].options.map((p) => {
+    const allMyOption = questionBank[1][currentPosition].options.map((p) => {
       return `<div class="option">
         <input type="radio" name="input" value="${p}">
         <span class="option1">${p}</span>
@@ -55,28 +68,46 @@ function displayQuestion() {
     $list = document.querySelector(".list").innerHTML = allMyOption.join("");
 
     displayQuNum.innerHTML =
-      "Question " + questionBank[1][i].id + " of " + " " + questionBank.length;
-    selectedOpt();
+      "Question " +
+      questionBank[1][currentPosition].id +
+      " of " +
+      " " +
+      questionBank[1].length;
+    selectedOptMaths();
   }
 }
 
-// function select option
+// function select option for English
 function selectedOpt() {
   let allMyOption = document.querySelectorAll("input");
 
   allMyOption.forEach((input) => {
     input.addEventListener("click", () => {
-      let parentCon = input.parentElement;
-      let optionCon = parentCon.querySelector(".option1");
-      let correct = questionBank[0][i].answer;
-      let correct2 = questionBank[1][i].answer;
-
-      if (optionCon.innerText === correct) {
-        score += 1;
+      if (questionBank[0]) {
+        let parentCon = input.parentElement;
+        let correct = questionBank[0][currentPosition].answer;
+        if (input.value === correct) {
+          console.log("true");
+          score1 += 1;
+        }
       }
+    });
+  });
+}
+// function select option for maths
 
-      if (optionCon.innerText === correct2) {
-        score += 1;
+function selectedOptMaths() {
+  let allMyOption = document.querySelectorAll("input");
+
+  allMyOption.forEach((input) => {
+    input.addEventListener("click", () => {
+      if (questionBank[1]) {
+        let parentCon = input.parentElement;
+        let correct2 = questionBank[1][currentPosition].answer;
+        if (input.value === correct2) {
+          console.log("true");
+          score2 += 1;
+        }
       }
     });
   });
@@ -90,12 +121,6 @@ function nextQuestion() {
     if (!p.checked) {
       errorCon.classList.add("show");
       next.disabled = isDisabled;
-    } else {
-      i += 1;
-
-      if (i < questionBank.length) {
-        displayQuestion();
-      }
     }
   });
   allMyOption.forEach((p) => {
@@ -103,27 +128,70 @@ function nextQuestion() {
       errorCon.classList.remove("show");
     }
   });
-}
-
-function totalScore() {
-  if (i >= questionBank.length) {
-    quzCon.style.display = "none";
-    scoreContainer.style.display = "flex";
-    console.log(score);
-    scoreCon.innerHTML = `Your Total Score ${score}   /  ${questionBank.length}`;
+  if (currentPosition < questionBank[0].length) {
+    currentPosition += 1;
+    console.log(currentPosition);
+    displayQuestion();
+  } else if (currentPosition < questionBank[1].length) {
+    currentPosition += 1;
+    console.log(currentPosition);
+    displayQuestion();
   }
 }
 
+// total score for english
+// function totalScore() {
+//   if (currentPosition === questionBank[0].length - 1) {
+//     quzCon.style.display = "none";
+//     scoreContainer.style.display = "flex";
+
+//     $name.innerHTML = inpEl.value;
+//     scoreCon.innerHTML = `Your Total Score ${score1}   /  ${questionBank[0].length}`;
+//   }
+//   // else {
+//   //   if (currentPosition === questionBank[1].length) {
+//   //     quzCon.style.display = "none";
+//   //     scoreContainer.style.display = "flex";
+
+//   //     $name.innerHTML = inpEl.value;
+//   //     scoreCon.innerHTML = `Your Total Score ${score2}   /  ${questionBank[1].length}`;
+//   //     console.log(score2);
+//   //   }
+//   // }
+// }
+// total score for maths
+
+const totalScore = (score, i) => {
+  if (currentPosition === questionBank[i].length - 1) {
+    quzCon.style.display = "none";
+    scoreContainer.style.display = "flex";
+    console.log(score);
+
+    $name.innerHTML = inpEl.value;
+    scoreCon.innerHTML = `Your Total Score ${score}   /  ${questionBank[i].length}`;
+  }
+};
+
 // prevous question
 function prevQuestion() {
-  i -= 1;
+  currentPosition -= 1;
   displayQuestion();
 }
 
+const select = document.querySelector(".select");
+
 next.addEventListener("click", () => {
-  selectedOpt();
   nextQuestion();
-  totalScore();
+  if (select.value == "English") {
+    totalScore(score1, 0);
+
+    console.log("english");
+  }
+  if (select.value == "Maths") {
+    totalScore(score2, 1);
+
+    console.log("maths");
+  }
 });
 prev.addEventListener("click", () => {
   prevQuestion();

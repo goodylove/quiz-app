@@ -12,6 +12,10 @@
     <!-- css links javascript links ends here -->
   </head>
   <body>
+    <div class="nav-con">
+      <div class="nav">Todays Quiz</div>
+    </div>
+
     <div class="page-container">
       <div class="overall-container">
         <h1 class="quz">Quiz App</h1>
@@ -22,7 +26,7 @@
           </span>
           <span class="sel-con">
             <label for="subject">Subject</label>
-            <select name="" id="sel">
+            <select class="select" id="sel">
               <option value="English">English</option>
               <option value="Maths">Maths</option>
             </select>
@@ -52,6 +56,7 @@
       </div>
       <div>
         <div class="score-con">
+          <span class="name"></span>
           <div class="score"></div>
           <div><button class="restart">Restart Quiz</button></div>
         </div>
